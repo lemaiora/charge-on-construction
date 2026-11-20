@@ -24,7 +24,7 @@ const routes = {Work:'/projects/', Ethos:'/approach/', Practice:'/about/', 'Scop
 const scopeUrl = scope => '/projects/' + scope.slug + '/';
 const link = (label, url = routes[label]) => `<a href="${url}">${escape(label)}</a>`;
 const nav = Object.keys(routes).slice(0,3).map(label => link(label)).join('');
-const brand = '<a class="brand" href="/" aria-label="Charge-On Construction home">Charge-On <span>${escape(s.specialty)}</span></a>';
+const brand = '<a class="brand" href="/" aria-label="Charge-On Construction home">Charge-On <span>Construction</span></a>';
 const header = home => `<header class="mast ${home?'opening':''}">${brand}<nav aria-label="Primary">${nav}</nav><button class="dots" aria-label="Open menu" aria-controls="directory" aria-expanded="false"><i></i><i></i><i></i></button></header>
 <dialog id="directory"><div class="menu-top">${brand}<button class="close" aria-label="Close menu">×</button></div><nav aria-label="Site directory">${Object.keys(routes).map(label=>link(label)).join('')}</nav><p>Orlando · Winter Park · Sanford</p></dialog>`;
 const footer = `<footer><div>${brand}<p>Orlando, Winter Park, Sanford &amp; Central Florida</p></div><div>${link('Project Inquiry')}<a href="mailto:${data.email}">${data.email}</a></div><small>Architectural illustrations throughout. Completed projects are not pictured.</small><small>© Charge-On Construction LLC</small></footer>`;
