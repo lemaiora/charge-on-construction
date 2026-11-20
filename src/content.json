@@ -1,0 +1,26 @@
+{
+  "company": "CHARGE-ON CONSTRUCTION LLC",
+  "shortName": "CHARGE-ON",
+  "tagline": "Craftsmanship in every detail.",
+  "intro": "Charge-On Construction supports commercial build-outs, custom-home interiors and renovations throughout Central Florida. From framing and drywall to detailed finish carpentry, every scope begins with understanding the work and approaching the finished result with care.",
+  "email": "info@chargeonconstruction.com",
+  "location": "Orlando, Winter Park, Sanford & Central Florida",
+  "services": [
+    {"title":"Commercial interiors","number":"01","image":"modern-exterior.webp","description":"Metal framing, drywall, acoustical ceilings and interior finishes for tenant improvements and renovations, with demolition, concrete and masonry scopes available to suit the project."},
+    {"title":"Custom-home interiors","number":"02","image":"residential-interior.webp","description":"Wood framing, drywall, doors, trim and finish carpentry — from baseboards and crown molding to wainscoting, beams and staircase details."},
+    {"title":"Renovations & remodeling","number":"03","image":"interior-finishes.webp","description":"Selective demolition, framing changes, drywall, painting, flooring, doors and trim — considered around each property's existing conditions."},
+    {"title":"Repairs & finishing","number":"04","image":"carpentry-detail.webp","description":"Drywall patches, trim repairs, painting touch-ups and smaller construction projects handled with the same attention to detail."}
+  ],
+  "imageNotice":"Illustrative architectural imagery created for this website preview. These images do not represent completed Charge-On Construction projects.",
+  "images": {
+    "hero":"hero-residence.webp",
+    "exterior":"facade-sunlight.webp",
+    "detail":"carpentry-detail.webp",
+    "interior":"residential-interior.webp",
+    "exterior2":"modern-exterior.webp",
+    "renovation":"interior-finishes.webp",
+    "light":"light-filled-interior.webp",
+    "entry":"entry-landscape.webp",
+    "joinery":"wood-joinery.webp"
+  }
+}
