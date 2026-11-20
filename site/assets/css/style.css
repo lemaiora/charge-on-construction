@@ -102,9 +102,15 @@ footer small{color:#52544e;font-size:13px}
 @media(max-width:767px){:root{--edge:14px}.hero{height:calc(100svh - 95px)}.mast,.menu-top{padding:0 14px}.brand{font-size:23px}.dots{margin-right:0}.statement{padding:54px 25px 65px}.solo,.solo.left{width:calc(100% - 2 * var(--edge));margin:0 var(--edge) 64px}.duo,.gallery-pair{display:block;margin-bottom:60px}.duo .plate:first-child,.duo.reverse .plate:first-child{margin:0 0 48px}.duo .plate:last-child,.duo.reverse .plate:last-child{width:78%;margin:0 0 0 auto}.plate figcaption{font-size:17px;padding:30px 12px 12px}.plate figcaption span{font-size:11px}.more{padding:58px 16px}.work-grid{display:block;margin:60px var(--edge) 60px}.work-grid .plate:nth-child(n){width:100%;margin:0 0 24px}.work-grid .plate:nth-child(odd){width:70vw;margin-inline:auto}.switcher{height:49px;font-size:15px}.register{margin-top:60px}.register a{grid-template-columns:1.5fr 1fr;min-height:100px}.register a span:first-of-type,.register a span:last-of-type{display:none}.register h2{font-size:18px}.register span{font-size:14px;text-align:right}.spread,.practice-grid,.inquiry{grid-template-columns:1fr;gap:24px;padding:54px var(--edge)}.gallery-pair img:last-child{margin:22px 0 0}.practice-cards{grid-template-columns:1fr 1fr;gap:28px 12px;margin-top:70px}.practice-cards figcaption{font-size:16px}.markers{right:3px}.detail-head{bottom:42px}.ethos h2{padding:0 13vw}.detail-links{margin-bottom:42px}.inquiry form{margin-top:12px}footer{grid-template-columns:1fr;padding-top:32px;gap:26px}footer small:last-child{margin-top:-16px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
 @media(max-width:767px){
-  .detail-hero{height:calc(100svh - 95px);min-height:210px}
+  .detail-hero{height:min(calc(100svh - 95px),144vw,590px);min-height:210px}
   .ethos .markers,.ethos .advance{display:none!important}
   .switcher{margin-inline:var(--edge);border-bottom:0;border-top:1px solid #c9cbc2}
   .switcher:has([aria-current]) a{color:#60625a}
   .switcher:has([aria-current]) [aria-current]{color:var(--ink);text-decoration:none}
+}
+
+@media(max-width:400px){
+  .work-grid{margin-top:45px}
+  .work-grid .plate:nth-child(odd){width:68.6vw}
+  .practice-cards{margin-top:56px}
 }
