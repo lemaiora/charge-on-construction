@@ -114,3 +114,7 @@ footer small{color:#52544e;font-size:13px}
   .work-grid .plate:nth-child(odd){width:68.6vw}
   .practice-cards{margin-top:56px}
 }
+
+.brand{-webkit-tap-highlight-color:transparent}
+.brand:focus{outline:none}
+.brand:focus-visible{text-decoration:underline;text-underline-offset:.18em;text-decoration-thickness:1px}
