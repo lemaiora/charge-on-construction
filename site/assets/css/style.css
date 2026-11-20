@@ -118,3 +118,6 @@ footer small{color:#52544e;font-size:13px}
 .brand{-webkit-tap-highlight-color:transparent}
 .brand:focus{outline:none}
 .brand:focus-visible{text-decoration:underline;text-underline-offset:.18em;text-decoration-thickness:1px}
+
+.inquiry [hidden]{display:none}
+.spread .member{margin-top:24px;font-size:18px}

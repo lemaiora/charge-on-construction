@@ -50,10 +50,25 @@ if (markers) {
 }
 
 const inquiry = document.querySelector('#inquiry');
-if (inquiry) inquiry.addEventListener('submit', event => {
-  event.preventDefault();
-  const fields = new FormData(inquiry);
-  const body = [...fields].filter(([,value]) => value.trim()).map(([key,value]) => key + ': ' + value).join('\r\n\r\n');
-  const subject = 'Project inquiry — ' + fields.get('Scope');
-  window.location.href = inquiry.action + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-});
+if (inquiry && new URL(inquiry.action).origin === location.origin) {
+  const requestId = crypto.randomUUID();
+  inquiry.addEventListener('submit', async event => {
+    event.preventDefault();
+    const button = inquiry.querySelector('button');
+    const status = inquiry.querySelector('[role="status"]');
+    if (button.disabled) return;
+    button.disabled = true;
+    status.textContent = 'Sending…';
+    try {
+      const body = new URLSearchParams(new FormData(inquiry));
+      body.set('request_id',requestId);
+      const response = await fetch(inquiry.action,{method:'POST',headers:{Accept:'application/json'},body});
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.message);
+      location.assign('../thank-you/');
+    } catch (error) {
+      status.textContent = error.message || 'Please try again or email the team directly.';
+      button.disabled = false;
+    }
+  });
+}
