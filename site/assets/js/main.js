@@ -1,28 +1,59 @@
-(() => {
-  const header = document.querySelector('#site-header');
-  const menu = document.querySelector('#mobile-menu');
-  const toggle = document.querySelector('.menu-toggle');
-  const body = document.body;
-  const updateHeader = () => header?.classList.toggle('scrolled', window.scrollY > 45);
-  updateHeader();
-  window.addEventListener('scroll', updateHeader, {passive: true});
-  const setMenu = (open) => {
-    toggle?.setAttribute('aria-expanded', String(open));
-    toggle?.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
-    menu?.setAttribute('aria-hidden', String(!open));
-    menu?.classList.toggle('open', open);
-    header?.classList.toggle('menu-active', open);
-    body.classList.toggle('body-lock', open);
-    if (open) menu?.querySelector('a')?.focus(); else toggle?.focus();
+const mast = document.querySelector('.mast');
+const menu = document.querySelector('#directory');
+const toggle = document.querySelector('.dots');
+toggle.addEventListener('click', () => {
+  menu.showModal();
+  toggle.setAttribute('aria-expanded', 'true');
+});
+menu.querySelector('.close').addEventListener('click', () => menu.close());
+menu.addEventListener('click', event => {
+  if (event.target === menu && event.clientX < menu.getBoundingClientRect().left) menu.close();
+});
+menu.addEventListener('close', () => {
+  toggle.setAttribute('aria-expanded','false');
+  toggle.focus({preventScroll:true});
+});
+
+const hero = document.querySelector('.hero');
+let lastY = window.scrollY;
+function updateHeader() {
+  const y = Math.max(0, window.scrollY);
+  const opening = hero && y < hero.offsetHeight - mast.offsetHeight;
+  mast.classList.toggle('opening', Boolean(opening));
+  mast.classList.toggle('solid', y > 65);
+  const desktopOpening = opening && matchMedia('(min-width:1024px)').matches;
+  mast.style.top = desktopOpening ? (hero.offsetHeight - mast.offsetHeight - y) + 'px' : '';
+  if (Math.abs(y - lastY) > 3 || y === 0) {
+    mast.classList.toggle('away', !opening && y > mast.offsetHeight && y > lastY && !mast.contains(document.activeElement));
+    lastY = y;
+  }
+}
+window.addEventListener('scroll', updateHeader, {passive:true});
+window.addEventListener('resize', updateHeader);
+mast.addEventListener('focusin', () => mast.classList.remove('away'));
+updateHeader();
+
+const markers = document.querySelector('.markers');
+if (markers) {
+  const panels = document.querySelectorAll('.ethos section');
+  const mark = () => {
+    const mid = window.innerHeight / 2;
+    const active = [...panels].findIndex(p => {
+      const r = p.getBoundingClientRect();
+      return r.top <= mid && r.bottom > mid;
+    });
+    markers.style.display = active < 0 ? 'none' : '';
+    [...markers.children].forEach((a,i) => a.classList.toggle('active', i === active));
   };
-  toggle?.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
-  menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && menu?.classList.contains('open')) setMenu(false);
-    if (e.key === 'Tab' && menu?.classList.contains('open')) {
-      const links=[...menu.querySelectorAll('a')]; const first=links[0],last=links[links.length-1];
-      if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus()}
-      if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus()}
-    }
-  });
-})();
+  window.addEventListener('scroll', mark, {passive:true});
+  mark();
+}
+
+const inquiry = document.querySelector('#inquiry');
+if (inquiry) inquiry.addEventListener('submit', event => {
+  event.preventDefault();
+  const fields = new FormData(inquiry);
+  const body = [...fields].filter(([,value]) => value.trim()).map(([key,value]) => key + ': ' + value).join('\r\n\r\n');
+  const subject = 'Project inquiry — ' + fields.get('Scope');
+  window.location.href = inquiry.action + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+});
